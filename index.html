@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FlipCard — Math Flashcards</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="flashcard.css" />
+</head>
+
+<body>
+
+    <!-- ── Header ── -->
+    <header>
+        <h1>FlipCard</h1>
+        <p class="tagline">Flashcards that flip — and stick</p>
+    </header>
+
+    <!-- ── Topic Input ── -->
+    <div class="input-row">
+        <input type="text" id="topic-input" placeholder="Enter a topic, e.g. computer science" />
+        <button id="generate-btn">Generate Flashcards</button>
+    </div>
+
+    <p class="error-msg" id="error-msg">Something went wrong. Please try again.</p>
+
+    <!-- ── Flashcard Scene ── -->
+    <div class="flashcard-scene">
+        <div class="flashcard" id="flashcard">
+
+            <!-- Front -->
+            <div class="card-face card-front">
+                <span class="card-label">Question</span>
+                <p class="card-question" id="card-question">What language is used to style web pages?</p>
+            </div>
+
+            <!-- Back -->
+            <div class="card-face card-back">
+                <span class="card-label">Answer</span>
+                <p class="card-answer" id="card-answer">CSS</p>
+            </div>
+
+            <!-- Loading state -->
+            <div class="loading-overlay" id="loading-overlay">
+                <div class="spinner"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <p class="tap-hint">Tap the card to flip</p>
+
+    <!-- ── Progress dots ── -->
+    <div class="progress" id="progress-dots"></div>
+
+    <!-- ── Controls ── -->
+    <div class="controls">
+        <button class="ctrl-btn" id="prev-btn">← Previous</button>
+        <button class="ctrl-btn" id="next-btn">Next →</button>
+    </div>
+
+    <p class="card-counter" id="card-counter">Card 1 of 5</p>
+
+    <script src="flashcard.js"></script>
+</body>
+
+</html>
