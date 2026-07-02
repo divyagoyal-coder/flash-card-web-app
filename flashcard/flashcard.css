@@ -1,0 +1,312 @@
+/* ── Tokens ── */
+:root {
+    --bg: #F0EEF9;
+    --surface: #FFFFFF;
+    --back-face: #2B1F5C;
+    --accent: #5B3FE8;
+    --accent-lt: #7B61FF;
+    --text: #1A1530;
+    --muted: #7A748F;
+    --border: #DDD8F5;
+    --shadow: 0 8px 32px rgba(91, 63, 232, 0.12);
+    --radius-card: 20px;
+    --radius-btn: 50px;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 48px 16px 64px;
+}
+
+/* ── Header ── */
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: var(--accent);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 6px;
+}
+
+header p.tagline {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+/* ── Input Row ── */
+.input-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 48px;
+    width: 100%;
+    max-width: 460px;
+}
+
+#topic-input {
+    flex: 1;
+    padding: 12px 20px;
+    border: 2px solid var(--border);
+    border-radius: var(--radius-btn);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    background: var(--surface);
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+#topic-input::placeholder {
+    color: var(--muted);
+}
+
+#topic-input:focus {
+    border-color: var(--accent);
+}
+
+#generate-btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: var(--radius-btn);
+    background: var(--accent);
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    white-space: nowrap;
+}
+
+#generate-btn:hover {
+    background: var(--accent-lt);
+}
+
+#generate-btn:active {
+    transform: scale(0.97);
+}
+
+/* ── Flashcard Wrapper ── */
+.flashcard-scene {
+    perspective: 1200px;
+    width: 350px;
+    height: 250px;
+    cursor: pointer;
+    margin-bottom: 12px;
+}
+
+.flashcard {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.flashcard.is-flipped {
+    transform: rotateY(180deg);
+}
+
+/* shared face styles */
+.card-face {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-card);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 28px 32px;
+    box-shadow: var(--shadow);
+}
+
+/* Front */
+.card-front {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+}
+
+.card-front .card-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+}
+
+.card-front .card-question {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text);
+    text-align: center;
+    line-height: 1.5;
+}
+
+/* Back */
+.card-back {
+    background: var(--back-face);
+    transform: rotateY(180deg);
+}
+
+.card-back .card-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-lt);
+    margin-bottom: 14px;
+}
+
+.card-back .card-answer {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #E8E4FF;
+    text-align: center;
+    line-height: 1.6;
+}
+
+/* ── Tap hint ── */
+.tap-hint {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-bottom: 32px;
+    letter-spacing: 0.02em;
+}
+
+/* ── Progress dots ── */
+.progress {
+    display: flex;
+    gap: 7px;
+    margin-bottom: 28px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--border);
+    transition: background 0.25s, transform 0.25s;
+}
+
+.dot.active {
+    background: var(--accent);
+    transform: scale(1.3);
+}
+
+/* ── Controls ── */
+.controls {
+    display: flex;
+    gap: 14px;
+}
+
+.ctrl-btn {
+    padding: 12px 32px;
+    border: 2px solid var(--accent);
+    border-radius: var(--radius-btn);
+    background: transparent;
+    color: var(--accent);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, transform 0.1s, opacity 0.2s;
+}
+
+.ctrl-btn:hover {
+    background: var(--accent);
+    color: #fff;
+}
+
+.ctrl-btn:active {
+    transform: scale(0.97);
+}
+
+.ctrl-btn:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+
+.ctrl-btn:disabled:hover {
+    background: transparent;
+    color: var(--accent);
+}
+
+/* ── Loading overlay ── */
+.loading-overlay {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-card);
+    background: rgba(240, 238, 249, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+    z-index: 10;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.loading-overlay.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.spinner {
+    width: 36px;
+    height: 36px;
+    border: 3px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ── Card counter ── */
+.card-counter {
+    font-size: 0.78rem;
+    color: var(--muted);
+    font-weight: 500;
+    margin-top: 20px;
+}
+
+/* ── Error message ── */
+.error-msg {
+    display: none;
+    color: #c0392b;
+    font-size: 0.85rem;
+    margin-top: -28px;
+    margin-bottom: 20px;
+    text-align: center;
+}
